@@ -7,11 +7,12 @@ from utils.text_processing import clean_text
 with open('src/models/sentiment_model.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
 
-with open('src/models/vectorizer.pkl', 'rb') as vectorizer_file:
-    vectorizer = pickle.load(vectorizer_file)
+with open('src/models/vectorizer.pkl', 'rb') as vec_file:
+    vectorizer = pickle.load(vec_file)
 
-with open('src/models/label_encoder.pkl', 'rb') as label_encoder_file:
-    label_encoder = pickle.load(label_encoder_file)
+with open('src/models/label_encoder.pkl', 'rb') as enc_file:
+    label_encoder = pickle.load(enc_file)
+
 
 # Titre de l'application
 st.title("Analyse des Sentiments des Commentaires")
