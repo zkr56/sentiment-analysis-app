@@ -1,0 +1,36 @@
+import pickle
+from sklearn import svm
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.preprocessing import LabelEncoder
+import pandas as pd
+
+# Exemple de données
+data = {
+    'text': ['J'adore ce produit', 'Je déteste ce service', 'C\'est un excellent achat', 'Je ne suis pas satisfait'],
+    'sentiment': ['positif', 'négatif', 'positif', 'négatif']
+}
+
+# Création d'un DataFrame
+df = pd.DataFrame(data)
+
+# Vectorisation des textes
+vectorizer = TfidfVectorizer()
+X = vectorizer.fit_transform(df['text'])
+
+# Encodage des labels
+label_encoder = LabelEncoder()
+y = label_encoder.fit_transform(df['sentiment'])
+
+# Entraînement du modèle
+model = svm.SVC()
+model.fit(X, y)
+
+# Sauvegarde du modèle, du vectorizer et de l'encodeur
+with open('src/models/sentiment_model.pkl', 'wb') as model_file:
+    pickle.dump(model, model_file)
+
+with open('src/models/vectorizer.pkl', 'wb') as vectorizer_file:
+    pickle.dump(vectorizer, vectorizer_file)
+
+with open('src/models/label_encoder.pkl', 'wb') as label_encoder_file:
+    pickle.dump(label_encoder, label_encoder_file)
